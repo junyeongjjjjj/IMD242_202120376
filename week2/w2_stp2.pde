@@ -1,0 +1,13 @@
+size (640, 480);
+//colorMode (HSB, 255);
+//colorMode (HSB, 360, 100, 100);
+background (250, 120, 120);
+fill (250, 120, 120);
+stroke (0, 100, 250);
+strokeWeight (8);
+circle (150, 240, 100);
+fill (250, 120, 120, 190);
+//stroke (255,0, 20, 127);
+noStroke ();
+rectMode(CENTER);
+square (200, 240, 100);
