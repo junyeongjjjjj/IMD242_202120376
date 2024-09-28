@@ -17,7 +17,7 @@ void draw() {
   for (int i = 0; i < 20; i++) {
     float newX = x[i] + random(-20, 20);
     float newY = y[i] + random(-20, 20);
-    line(x[i], y[i], newX, newY); // 이전 위치와 새로운 위치를 선으로 연결
+    line(x[i], y[i], newX, newY);
     x[i] = newX;
     y[i] = newY;
   }
