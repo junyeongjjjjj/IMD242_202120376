@@ -1,21 +1,18 @@
-// ChatGPT 기반으로 제작함
-
 ArrayList<InteractionSource> interactionSources; 
 int cols, rows;  
 float[][] current, previous; // 현재 프레임의 파동 상태와 이전 프레임의 상태를 저장
 float damping = 0.99; // Q. 파동이 상호작용과 만나 약해지려면? 파동의 감쇠율, 값이 작을수록 파동이 더 빨리 약해진다
 
 void setup() {
-  fullScreen(); 
-  //Q. 초기 구문 ~한 인터랙션 코드를 구현하려고 한다 ~ 조건을 지켜 초기 구문을 작성해줘
+  fullScreen(); // Q. 초기 구문 ~한 인터랙션 코드를 구현하려고 한다 ~ 조건을 지켜 초기 구문을 작성해줘
   //(초기 구문 작성 시 구현 된 코드이고 몰랐던 내용들 각주)
-  cols = displayWidth; // 화면의 가로 픽셀 수를 열의 수로 설정
-  rows = displayHeight; // 화면의 세로 픽셀 수를 행의 수로 설정
+  cols = width; // 화면의 가로 픽셀 수를 열의 수로 설정
+  rows = height; // 화면의 세로 픽셀 수를 행의 수로 설정
   current = new float[cols][rows]; // 현재 상태를 저장하는 배열 초기화
   previous = new float[cols][rows]; // 이전 상태를 저장하는 배열 초기화
   interactionSources = new ArrayList<InteractionSource>(); // 상호작용 리스트 초기화
   // Q. 화면 중심에 기본 상호작용 추가 > 이후 수정
-  interactionSources.add(new InteractionSource(displayWidth / 2, displayHeight / 2, 200, 0.1));
+  interactionSources.add(new InteractionSource(width / 2, height / 2, min(width, height) / 5, 0.1));
   noStroke();
 }
 
@@ -43,7 +40,7 @@ void draw() {
      
       float colorValue = map(current[x][y], -1, 1, 0, 255); // 픽셀의 색상 값을 계산하는데 파동 값 > 색상 값으로 매핑하기
       colorValue = constrain(colorValue, 0, 255); //
-      pixels[x + y * displayWidth] = color(colorValue, colorValue * 0.7, 255 - colorValue);
+      pixels[x + y * width] = color(colorValue, colorValue * 0.7, 255 - colorValue);
     }
   }
   updatePixels(); // 업데이트된 픽셀 데이터를 화면에 반영
@@ -67,7 +64,7 @@ void draw() {
 
 void mouseDragged() {
   //Q. 드래그로 상호 작용 추가하는 코드 작성 > 이후 수정
-  interactionSources.add(new InteractionSource(mouseX, mouseY, random(100, 300), random(0.05, 0.1)));
+  interactionSources.add(new InteractionSource(mouseX, mouseY, random(min(width, height) / 10, min(width, height) / 4), random(0.05, 0.1)));
 }
 
 void mousePressed() {
